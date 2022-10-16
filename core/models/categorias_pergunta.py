@@ -1,5 +1,5 @@
 from django.db import models
-from .Base import Base
+from .base import Base
 
 class CategoriaPerguntas(Base):
     nome_categoria = models.CharField('Categoria', max_length=50)

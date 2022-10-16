@@ -1,5 +1,5 @@
 from django.db import models
-from .Base import Base
+from .base import Base
 
 class Perguntas(Base):
     ALTERNATIVAS_CHOICES = (
