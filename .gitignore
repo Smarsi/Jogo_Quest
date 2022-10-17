@@ -60,10 +60,14 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-*/migrations
+*/migrations/
 /migrations
 migrations/
 migrations/*
+core/migrations
+core/migrations/*
+*.migrations
+core/migrations
 
 # Flask stuff:
 instance/
