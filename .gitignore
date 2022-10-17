@@ -137,3 +137,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+core/migrations/0001_initial.py
