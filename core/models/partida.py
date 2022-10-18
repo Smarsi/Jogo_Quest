@@ -7,17 +7,49 @@ from .perguntas import Perguntas
 
 
 class Partida(Base):
-    pontuacao = models.DecimalField('Pontuação', max_digits=8, decimal_places=2, blank=False, null=False)
-    jogador1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name='jogador1')
-    jogador2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name='jogador2')
-    categoria_perguntas = models.CharField('Categoria', max_length=50)
+    STATUS_CHOICES = (
+        ('0', 'Aguardando Inicio'),
+        ('1', 'Iniciada'),
+        ('2', 'Finalizada')
+    )
 
-    perguntas = models.ManyToManyField(Perguntas, related_name='PerguntasPartida', through="PerguntasPartida")
+    pontuacao = models.DecimalField('Pontuação', max_digits=8, decimal_places=2, blank=False, null=False)
+    usuarioPartida = models.ManyToManyField(User, related_name='UsuarioPartida', through='UsuarioPartida')
+    status = models.CharField('Status', max_length=50, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
+
+    class Meta:
+        verbose_name = 'Partida'
+        verbose_name_plural = 'Partidas'
+
+    def __str__(self):
+        return str(self.pk)
 
 
 
 # --------------- Relacionamentos ManyToMany -----------------
 
-class PerguntasPartida(models.Model):
-    partida = models.ForeignKey(Partida, on_delete=models.PROTECT, related_name='perguntas_partida')
-    pergunta = models.ForeignKey(Perguntas, on_delete=models.PROTECT, related_name='perguntas_partida')
+class UsuarioPartida(models.Model):
+    partida = models.ForeignKey(Partida, on_delete=models.PROTECT, related_name='usuario_partida')
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='usuario_partida')
+    resultado = models.CharField('Resultado', max_length=20, null=True, blank=True)
+    
+    perguntas = models.ManyToManyField(Perguntas, related_name='PerguntasUsuarioPartida', through="PerguntasUsuarioPartida")
+
+    def __str__(self):
+        return str(self.usuario)
+
+class PerguntasUsuarioPartida(models.Model):
+    STATUS_CHOICES = (
+        ('0', 'Não Respondida'),
+        ('1', 'Respondida Errado'),
+        ('2', 'Respondida Corretamente')
+    )
+
+    usuarioPartida = models.ForeignKey(UsuarioPartida, on_delete=models.PROTECT, related_name='perguntas_usuario_partida')
+    pergunta = models.ForeignKey(Perguntas, on_delete=models.PROTECT, related_name='perguntas_usuario_partida')
+    status = models.CharField('Status', max_length=25, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
+
+    def __str__(self):
+        return str(self.usuarioPartida)
+
+
