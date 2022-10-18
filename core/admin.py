@@ -9,6 +9,14 @@ class PartidaAdmin(admin.ModelAdmin):
 class CategoriaPerguntas(admin.ModelAdmin):
     list_display = ['nome_categoria']
 
+class AlternativasInLine(admin.TabularInline):
+    model = Alternativas
+
 @admin.register(Perguntas)
 class PerguntasAdmin(admin.ModelAdmin):
     list_display = ['pergunta', 'resposta']
+    inlines = [AlternativasInLine,]
+
+@admin.register(Alternativas)
+class AlternativasAdmin(admin.ModelAdmin):
+    list_display = ['resposta', 'pergunta']
