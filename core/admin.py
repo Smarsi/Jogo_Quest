@@ -19,4 +19,5 @@ class PerguntasAdmin(admin.ModelAdmin):
 
 @admin.register(Alternativas)
 class AlternativasAdmin(admin.ModelAdmin):
-    list_display = ['resposta', 'pergunta']
+    list_display = ['resposta', 'pergunta', 'correta']
+    list_filter = ('pergunta', 'correta')
