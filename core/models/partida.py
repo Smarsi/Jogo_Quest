@@ -15,7 +15,7 @@ class Partida(Base):
 
     pontuacao = models.DecimalField('Pontuação', max_digits=8, decimal_places=2, blank=False, null=False)
     usuarioPartida = models.ManyToManyField(User, related_name='UsuarioPartida', through='UsuarioPartida')
-    status = models.CharField('Status', max_length=50, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
+    status = models.CharField('Status', max_length=5, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
 
     class Meta:
         verbose_name = 'Partida'

@@ -38,8 +38,9 @@ class AlternativasInLine(admin.TabularInline):
 
 @admin.register(Perguntas)
 class PerguntasAdmin(admin.ModelAdmin):
-    list_display = ['pergunta', 'resposta']
+    list_display = ['pergunta', 'tema_pergunta']
     inlines = [AlternativasInLine,]
+    list_filter = ('tema_pergunta',)
 
 @admin.register(Alternativas)
 class AlternativasAdmin(admin.ModelAdmin):

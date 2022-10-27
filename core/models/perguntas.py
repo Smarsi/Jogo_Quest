@@ -18,9 +18,8 @@ class Alternativas(Base):
 
 class Perguntas(Base):
     CHOICE_LIST = Alternativas.objects.all()
-
+    
     pergunta = models.CharField('Pergunta', max_length=50)
-    resposta = models.CharField('Resposta', max_length=150)
 
     #Relacionamentos
     tema_pergunta = models.ForeignKey('core.Tema', verbose_name='Tema', on_delete=models.CASCADE, default=0)
