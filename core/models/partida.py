@@ -31,7 +31,7 @@ class Partida(Base):
 class UsuarioPartida(models.Model):
     partida = models.ForeignKey(Partida, on_delete=models.PROTECT, related_name='usuario_partida')
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='usuario_partida')
-    resultado = models.CharField('Resultado', max_length=20, null=True, blank=True)
+    pontuacao = models.IntegerField('Pontuação', null=True, blank=True)
     
     perguntas = models.ManyToManyField(Perguntas, related_name='PerguntasUsuarioPartida', through="PerguntasUsuarioPartida")
 

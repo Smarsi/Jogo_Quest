@@ -3,6 +3,7 @@ from .models import *
 
 class UsuariosPartidaInline(admin.TabularInline):
     model = UsuarioPartida
+    max_num = 2
 
 class UsuariosPerguntasInline(admin.TabularInline):
     model = PerguntasUsuarioPartida
@@ -14,7 +15,7 @@ class PartidaAdmin(admin.ModelAdmin):
 
 @admin.register(UsuarioPartida)
 class UsuarioPartidaAdmin(admin.ModelAdmin):
-    list_display = ['usuario', 'partida', 'resultado', ]
+    list_display = ['usuario', 'partida', 'pontuacao', ]
     inlines = [UsuariosPerguntasInline,]
     list_filter = ('partida',)
 
@@ -33,16 +34,12 @@ class CategoriaPerguntas(admin.ModelAdmin):
 class TemaAdmin(admin.ModelAdmin):
     list_display = ['nome']
 
-class AlternativasInLine(admin.TabularInline):
-    model = Alternativas
-
 @admin.register(Perguntas)
 class PerguntasAdmin(admin.ModelAdmin):
     list_display = ['pergunta', 'tema_pergunta']
-    inlines = [AlternativasInLine,]
     list_filter = ('tema_pergunta',)
 
-@admin.register(Alternativas)
-class AlternativasAdmin(admin.ModelAdmin):
-    list_display = ['resposta', 'pergunta', 'correta']
-    list_filter = ('pergunta', 'correta')
+@admin.register(Pontuacao)
+class RankingAdmin(admin.ModelAdmin):
+    list_display = ['usuario', 'pontos']
+    list_filter = ('usuario', 'pontos')

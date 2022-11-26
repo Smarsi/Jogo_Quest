@@ -90,6 +90,18 @@ WSGI_APPLICATION = 'quest.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quest',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+'''
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'quest',
         'USER': 'postgres',
@@ -98,6 +110,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
