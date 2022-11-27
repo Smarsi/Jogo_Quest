@@ -68,6 +68,9 @@ core/migrations
 core/migrations/*
 *.migrations
 core/migrations
+media/
+/media
+media/*
 
 # Flask stuff:
 instance/

@@ -13,9 +13,11 @@ class Partida(Base):
         ('2', 'Finalizada')
     )
 
-    pontuacao = models.DecimalField('Pontuação', max_digits=8, decimal_places=2, blank=False, null=False)
     usuarioPartida = models.ManyToManyField(User, related_name='UsuarioPartida', through='UsuarioPartida')
     status = models.CharField('Status', max_length=5, choices=STATUS_CHOICES, default=STATUS_CHOICES[0])
+
+    #Relationships
+    vencedor = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Partida'
