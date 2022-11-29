@@ -28,16 +28,36 @@ class GetPerguntas(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class CadPerguntas(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-
+    
     def post(self, request, format=None):
-
+        response = []
         info = request.data
+        for i in info:
+            if(i[2] == "a"):
+                resposta = 1
+            if(i[2] == "b"):
+                resposta = 2
+            if(i[2] == "c"):
+                resposta = 3
+            if(i[2] == "d"):
+                resposta = 4
+            if(i[2] == "e"):
+                resposta = 5
+
+            data = {
+                'pergunta': i[0], 
+                'alternativa1': i[1][0], 
+                'alternativa2': i[1][1], 
+                'alternativa3': i[1][2], 
+                'alternativa4': i[1][3], 
+                'alternativa5': i[1][4], 
+                'resposta': resposta,
+                'tema_pergunta': 1
+            }
+
+            serializer = PerguntasSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
 
 
-        
-        print(request.data)
-
-        content = "Olá mundo"
-        return Response(content)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
