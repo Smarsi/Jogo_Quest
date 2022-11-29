@@ -49,10 +49,6 @@ class RankingAdmin(admin.ModelAdmin):
 class AvatarAdmin(admin.ModelAdmin):
     list_display = ['descricao', 'imagem']
 
-@admin.register(UsuarioAvatar)
-class UsuarioAvatarAdmin(admin.ModelAdmin):
-    list_display = ['usuario', 'avatar']
-
 @admin.register(Peao)
 class PeaoAdmin(admin.ModelAdmin):
     list_display = ['descricao', 'imagem']
