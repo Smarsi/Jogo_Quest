@@ -20,3 +20,15 @@ class PerguntasSerializer(serializers.ModelSerializer):
         model = Perguntas
         fields = ["pergunta", "alternativa1", "alternativa2", "alternativa3", "alternativa4", "alternativa5", "resposta", "tema_pergunta"]
 
+
+class CategoriasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CategoriaPerguntas
+        fields = ["nome_categoria"]
+
+class TemasSerializer(serializers.ModelSerializer):
+    #categoria = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Tema
+        fields = ["nome", "categoria"]

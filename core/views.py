@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 #import dos serializers
-from .serializers import PerguntasSerializer
+from .serializers import PerguntasSerializer, CategoriasSerializer, TemasSerializer, TemasSerializer
 
 #import de informacoes
 from .models import *
@@ -28,7 +28,6 @@ class GetPerguntas(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class CadPerguntas(APIView):
-    
     def post(self, request, format=None):
         response = []
         info = request.data
@@ -61,3 +60,16 @@ class CadPerguntas(APIView):
 
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetCategorias(APIView):
+    def get(self, request, format=None):
+        categorias = CategoriaPerguntas.objects.all()
+        serializer = CategoriasSerializer(categorias, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class GetTemas(APIView):
+    def get(self, request, format=None):
+        temas = Tema.objects.all()
+        serializer = TemasSerializer(temas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
